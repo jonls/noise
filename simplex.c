@@ -379,7 +379,7 @@ main_loop()
 
 	int type = 0;
 
-	unsigned int t;
+	unsigned int t = 0;
 	SDL_Event event;
 	while (1) {
 		/* process pending events */
