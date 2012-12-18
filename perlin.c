@@ -13,6 +13,7 @@
 #define GL_CHECK_ERROR(s)  do { if (glGetError() != GL_NO_ERROR) { fprintf(stderr, "%s: Error at line %i in %s\n", (s), __LINE__, __FILE__); abort(); } } while (0)
 
 #define max(x,y)  (((x) > (y)) ? (x) : (y))
+#define min(x,y)  (((x) < (y)) ? (x) : (y))
 
 
 static const char grad3[][3] = {
@@ -410,6 +411,7 @@ recalculate_noise(int type, float z)
 
 			/* Update histogram */
 			unsigned int histogram_index = FASTFLOOR(noise[index]*WIDTH);
+			histogram_index = min(histogram_index, WIDTH-1);
 			histogram[histogram_index] += 1;
 			histogram_max = max(histogram[histogram_index], histogram_max);
 		}
