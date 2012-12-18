@@ -342,71 +342,73 @@ recalculate_noise(int type, float z)
 		for (int x = 0; x < WIDTH; x++) {
 			int index = y*WIDTH+x;
 			switch (type) {
-				case 0:
-					noise[index] = 0;
-					for (int l = 2; l < 4; l++) {
-						noise[index] += fabs((1.0/l)*perlin3d(((float)(1 << l)*x)/HEIGHT, ((float)(1 << l)*y)/HEIGHT, z));
-					}
-					noise[index] = sinf(-1.0+(0.8*M_PI*y)/HEIGHT + noise[index]);
-					noise[index] = 0.5*noise[index] + 0.5;
-					/*noise[index] = perlin3d(((float)(1 << 1)*x)/HEIGHT, ((float)(1 << 1)*y)/HEIGHT, z);
-					  noise[index] = 0.5*noise[index] + 0.5;*/
-					break;
-				case 1:
-					noise[index] = perlin3d(((float)(1 << 7)*x)/HEIGHT, ((float)(1 << 6)*y)/HEIGHT, z);
-					noise[index] = 0.5*noise[index] + 0.5;
-					break;
-				case 2:
-					noise[index] = perlin3d(((float)(1 << 8)*x)/HEIGHT, ((float)(1 << 2)*y)/HEIGHT, z);
-					noise[index] = 0.5*noise[index] + 0.5;
-					break;
-				case 3:
-					noise[index] = perlin3d(((float)(1 << 4)*x)/HEIGHT, ((float)(1 << 4)*y)/HEIGHT, z);
-					noise[index] = 0.5*noise[index] + 0.5;
-					break;
-				case 4:
-					noise[index] = 0;
-					for (int l = 1; l < 5; l++) {
-						noise[index] += (1.0/(1 << l))*perlin3d(((float)(1 << l)*x)/HEIGHT, ((float)(1 << l)*y)/HEIGHT, z);
-					}
-					noise[index] = 0.5 * noise[index] * ((float)(1 << 4))/((float)(1 << 4)-1.0) + 0.5;
-					break;
-				case 5:
-					noise[index] = 0;
-					for (int l = 1; l < 5; l++) {
-						noise[index] += (1.0/(1 << l))*perlin3d(((float)(1 << l)*x)/HEIGHT, ((float)(1 << (l*l))*y)/HEIGHT, z);
-					}
-					noise[index] = 0.5 * noise[index] * ((float)(1 << 4))/((float)(1 << 4)-1.0) + 0.5;
-					break;
-				case 6:
-					noise[index] = 0;
-					for (int l = 1; l < 5; l++) {
-						noise[index] += fabs((1.0/(1 << l))*perlin3d(((float)(1 << l)*x)/HEIGHT, ((float)(1 << l)*y)/HEIGHT, z));
-					}
-					noise[index] = noise[index] * ((float)(1 << 4))/((float)(1 << 4)-1.0) + 0.25;
-					break;
-				case 7:
-					noise[index] = 0;
-					for (int l = 1; l < 5; l++) {
-						noise[index] += fabs((1.0/(1 << l))*perlin3d(((float)(1 << ((l % 2) ? l*l : l))*x)/HEIGHT, ((float)(1 << ((l % 2) ? l : l*l))*y)/HEIGHT, z));
-					}
-					noise[index] = noise[index] * ((float)(1 << 4))/((float)(1 << 4)-1.0) + 0.25;
-					break;
-				case 8:
-					noise[index] = 0;
-					for (int l = 1; l < 5; l++) {
-						noise[index] += fabs((1.0/(1 << l))*perlin3d(((float)(1 << l)*x)/HEIGHT, ((float)(1 << l)*y)/HEIGHT, z));
-					}
-					noise[index] = sinf(-1.0+(1.8*M_PI*y)/HEIGHT + noise[index]);
-					noise[index] = 0.5*noise[index] + 0.5;
-					break;
-				case 9:
-					noise[index] = 0.0;
-					for (int l = 1; l < 5; l++) {
-						noise[index] += sinf(((float)l*M_PI*y)/HEIGHT + ((float)(5-l)*M_PI*x)/WIDTH + fabs(perlin3d(((float)(1 << l)*x)/HEIGHT, ((float)(1 << l)*y)/HEIGHT, z)));
-					}
-					noise[index] = (1.0/8.0)*noise[index] + 0.5;
-					break;
+			case 0:
+				noise[index] = perlin3d(((float)(1 << 1)*x)/HEIGHT, ((float)(1 << 1)*y)/HEIGHT, z);
+				noise[index] = 0.5*noise[index] + 0.5;
+				break;
+			case 1:
+				noise[index] = perlin3d(((float)(1 << 7)*x)/HEIGHT, ((float)(1 << 6)*y)/HEIGHT, z);
+				noise[index] = 0.5*noise[index] + 0.5;
+				break;
+			case 2:
+				noise[index] = perlin3d(((float)(1 << 8)*x)/HEIGHT, ((float)(1 << 2)*y)/HEIGHT, z);
+				noise[index] = 0.5*noise[index] + 0.5;
+				break;
+			case 3:
+				noise[index] = perlin3d(((float)(1 << 4)*x)/HEIGHT, ((float)(1 << 4)*y)/HEIGHT, z);
+				noise[index] = 0.5*noise[index] + 0.5;
+				break;
+			case 4:
+				noise[index] = 0;
+				for (int l = 1; l < 5; l++) {
+					noise[index] += (1.0/(1 << l))*perlin3d(((float)(1 << l)*x)/HEIGHT, ((float)(1 << l)*y)/HEIGHT, z);
+				}
+				noise[index] = 0.5 * noise[index] * ((float)(1 << 4))/((float)(1 << 4)-1.0) + 0.5;
+				break;
+			case 5:
+				noise[index] = 0;
+				for (int l = 1; l < 5; l++) {
+					noise[index] += (1.0/(1 << l))*perlin3d(((float)(1 << l)*x)/HEIGHT, ((float)(1 << (l*l))*y)/HEIGHT, z);
+				}
+				noise[index] = 0.5 * noise[index] * ((float)(1 << 4))/((float)(1 << 4)-1.0) + 0.5;
+				break;
+			case 6:
+				noise[index] = 0;
+				for (int l = 1; l < 5; l++) {
+					noise[index] += fabs((1.0/(1 << l))*perlin3d(((float)(1 << l)*x)/HEIGHT, ((float)(1 << l)*y)/HEIGHT, z));
+				}
+				noise[index] = noise[index] * ((float)(1 << 4))/((float)(1 << 4)-1.0) + 0.25;
+				break;
+			case 7:
+				noise[index] = 0;
+				for (int l = 1; l < 5; l++) {
+					noise[index] += fabs((1.0/(1 << l))*perlin3d(((float)(1 << ((l % 2) ? l*l : l))*x)/HEIGHT, ((float)(1 << ((l % 2) ? l : l*l))*y)/HEIGHT, z));
+				}
+				noise[index] = noise[index] * ((float)(1 << 4))/((float)(1 << 4)-1.0) + 0.25;
+				break;
+			case 8:
+				noise[index] = 0;
+				for (int l = 1; l < 5; l++) {
+					noise[index] += fabs((1.0/(1 << l))*perlin3d(((float)(1 << l)*x)/HEIGHT, ((float)(1 << l)*y)/HEIGHT, z));
+				}
+				noise[index] = sinf(-1.0+(1.8*M_PI*y)/HEIGHT + noise[index]);
+				noise[index] = 0.5*noise[index] + 0.5;
+				break;
+			case 9:
+				noise[index] = 0.0;
+				for (int l = 1; l < 5; l++) {
+					noise[index] += sinf(((float)l*M_PI*y)/HEIGHT + ((float)(5-l)*M_PI*x)/WIDTH + fabs(perlin3d(((float)(1 << l)*x)/HEIGHT, ((float)(1 << l)*y)/HEIGHT, z)));
+				}
+				noise[index] = (1.0/8.0)*noise[index] + 0.5;
+				break;
+			case 10:
+				noise[index] = 0;
+				for (int l = 2; l < 4; l++) {
+					noise[index] += fabs((1.0/l)*perlin3d(((float)(1 << l)*x)/HEIGHT, ((float)(1 << l)*y)/HEIGHT, z));
+				}
+				noise[index] = sinf(-1.0+(0.8*M_PI*y)/HEIGHT + noise[index]);
+				noise[index] = 0.5*noise[index] + 0.5;
+				break;
 			}
 
 			/* Update histogram */
@@ -471,7 +473,7 @@ main_loop()
 					exit(0);
 					break;
 				case SDL_KEYDOWN:
-					if (event.key.keysym.sym == SDLK_SPACE) type = (type + 1) % 10;
+					if (event.key.keysym.sym == SDLK_SPACE) type = (type + 1) % 11;
 					break;
 			}
 		}
