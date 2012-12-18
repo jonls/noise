@@ -5,9 +5,9 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define WIDTH       1024
-#define HEIGHT      128
-#define SCALE         1
+#define WIDTH       256
+#define HEIGHT      256
+#define SCALE         2
 #define USE_RECT_TEX  0
 
 #define GL_CHECK_ERROR(s)  do { if (glGetError() != GL_NO_ERROR) { fprintf(stderr, "%s: Error at line %i in %s\n", (s), __LINE__, __FILE__); abort(); } } while (0)
